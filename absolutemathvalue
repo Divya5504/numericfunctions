@@ -1,0 +1,112 @@
+map function in boomi on 
+Math Absolute Value	
+Value: Input
+
+Absolute value of a number.
+Math Add	
+Value: Input
+
+Value to Add
+
+Add one value to another value.
+Math Subtract	
+Value: Input
+
+Value to Subtract
+
+Subtract one value from another value.
+Math Multiply	
+Value: Input
+
+Value to Multiply
+
+Multiply one value by another value.
+Math Divide	
+Value: Input
+
+Value to Divide
+
+Divide one value by another value.
+Math Ceil (Ceiling)	
+Value: Input
+
+Round the value up to the nearest whole number. For example, 1.2 to 2.0.
+Math Floor	
+Value: Input
+
+Round the value down to the nearest whole number. For example, 1.9 to 1.0.
+Math Set Precision	
+Value: Input
+
+Number of Precision: Number of decimal places
+
+Set the number of decimal places for the value.
+Number Format	
+Number String: Input
+
+Input Mask: Source format
+
+Output Mask: Destination format
+
+Reformat the value by specifying a numeric format. You can avoid using a Number Format function by configuring the source and destination profile elements to be a Number type and specifying the format.
+Running Total	
+Value to Sum: Input
+
+Maintains a running total of the values passed into it. The incremental total is output per destination "detail" instance.
+Sum	
+Value to Sum: Input
+
+Reset Value: Value used to reset sum.
+
+Calculates a sum based on a particular "Reset Value". For each unique value of the "Reset Value", a sum is calculated. The total is aggregated and output only once per destination "header" instance, per "Reset Value". For example, use the Sum function to add up a number of order line amounts and map out the order total to a header or summary field.
+Only one Sum function step may be used in a given user-defined function.
+
+Count	
+Field to Count: Input
+
+Reset Value: Input
+
+Works similarly to the Sum function but increments based on the presence of a static value. By default, it increments by 1 each time for each source input and output one final value.
+Line Item Increment	
+Increment Basis
+
+Reset Value
+
+Built-in counter that automatically increments for each occurrence of a source record. The result is output per destination "detail" instance. For example, use the Line Item Increment function to output the line number for each order line.
+Sequential Value	
+Key Name: An arbitrary, unique name for the counter. If a key name is not specified, a globally unique identifier (GUID) is assigned.
+
+Fix to Length: The length of the sequential value to be returned. The value is padded with zeros (0's) to the specified length.
+
+Batch Size: Number of sequential values to "reserve" in memory (default is 1). Increasing the Batch Size improves performance when mapping a larger number of records because future values are cached in memory.
+
+Built-in counter that automatically increments for each occurrence of the source record. The Key Name entity stores the latest value so future process executions continue to increment by 1 from the last result. Each counter is an ever-increasing value. Counter values are stored per Atom. If a given process is deployed to a different Atom, the next sequential value is different. Counter values for an Atom, Molecule, or Atom Cloud can be viewed and reset in the Counters panel in Manage > Atom Management.
+Regarding the use of Batch Sizes greater than 1, one consideration is that there could be breaks in the sequence of numbers. For example, say you specify a Batch Size of 100 but only process 50 records. They receive sequential numbers 1-50. When the process runs again, the next available sequential value would be 101.
+
+.........................................................................................................................................................................
+map function in boomi on Math Absolute Value with two inputs with example
+ChatGPT
+If you want to calculate the absolute value of two input values within a Map Function shape in Boomi, you can modify the previous example to handle multiple inputs. Here's an example:
+
+Add a Map Function shape to your Boomi process.
+
+Within the Map Function shape, add a scripting step.
+
+In the scripting step, use JavaScript code to calculate the absolute values of two input values. Here's an example:
+
+javascript Copy code
+// Get the input values from the map shape
+var inputValue1 = ${inputValue1};
+var inputValue2 = ${inputValue2};
+
+// Calculate the absolute values
+var absoluteValue1 = Math.abs(inputValue1);
+var absoluteValue2 = Math.abs(inputValue2);
+
+// Set the absolute values as the outputs for the map shape
+${outputValue1} = absoluteValue1;
+${outputValue2} = absoluteValue2;
+In the above code, ${inputValue1} and ${inputValue2} represent the two input values from the map shape. ${outputValue1} and ${outputValue2} are the output values that will be set and sent to the subsequent shapes in the process.
+
+Save the scripting step and configure the input and output mappings in the map shape according to your process requirements.
+By following this approach, you can use the scripting step within the Map Function shape to calculate the absolute values of two inputs in Boomi.
